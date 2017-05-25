@@ -17,6 +17,7 @@ public class GestioLlibre extends HttpServlet{
         dbCon = new ConfigConnection(this.getInitParameter("driver"),
                 this.getInitParameter("cadenaConnexioInit"),
                 this.getInitParameter("usuari"), this.getInitParameter("contrasenya"));
+        con = dbCon.getCon();
     }
     
     

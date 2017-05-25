@@ -9,27 +9,31 @@ public class ConfigConnection {
     private String cadenaConnection;
     private String usuari;
     private String contrasenya;
-
+    private String driver;
+    private boolean obert;
         
 
     public ConfigConnection() {
         cadenaConnection = "jdbc:oracle:thin:@192.168.180.10:1521:INSLAFERRERI";
         usuari = "DAVIDBLANCO";
         contrasenya = "1423";
+        driver = "oracle.jdbc.driver.OracleDriver";
     }
 
-    public ConfigConnection(String cadenaConnection, String usuari, String contrasenya) {
+    public ConfigConnection(String driver, String cadenaConnection, String usuari, String contrasenya) {
         this.cadenaConnection = cadenaConnection;
         this.usuari = usuari;
         this.contrasenya = contrasenya;
+        this.driver = driver;
     }
 
     public Connection getCon() {
         
         try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            setObert(false);
+            Class.forName(driver);
             con = DriverManager.getConnection(cadenaConnection, usuari, contrasenya);
-            System.out.println("Connexió oberta.");
+            setObert(true);
         }catch(ClassNotFoundException | SQLException ex){
             System.out.println(ex.getMessage());
             //Logger.getLogger(ConfigConnection.class.getName()).log(level.);
@@ -37,7 +41,15 @@ public class ConfigConnection {
         
         return con;
     }
-    
+
+    public boolean isObert() {
+        return obert;
+    }
+
+    public void setObert(boolean obert) {
+        this.obert = obert;
+    }
+
     public boolean tancar() throws SQLException{
         try {
             if (con != null && !con.isClosed()) {
