@@ -25,8 +25,8 @@
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>GestioLlibres</servlet-name>
-        <url-pattern>/GestioLlibres</url-pattern>
+        <servlet-name>GestioLlibre</servlet-name>
+        <url-pattern>/GestioLlibre</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
